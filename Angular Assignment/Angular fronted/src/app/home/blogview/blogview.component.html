@@ -1,0 +1,21 @@
+
+    <div class="card m-4" >
+        <div class="card-header">
+          {{ blog?.title }}
+          <button type="button" class="btn btn-danger "(click)="Delete(blog)" style="float: right;">Delete</button>
+          <button type="button" class="btn btn-primary "(click)="navigate(blog)" style="float: right;">EditBlog</button>
+          
+          </div>
+        <!-- </span>
+          <span style="float:right;color:red;"(click)="removeBlog(blog)">X</span>
+          
+          <button type="button" class="btn btn-primary "(click)="navigate(blog)" style="float: right;">EditBlog</button>
+        </div> -->
+        <div class="card-body">
+          Content:
+          <p class="card-text text-justify">{{blog?.markdown}}</p>
+          
+        </div>
+      </div>
+
+

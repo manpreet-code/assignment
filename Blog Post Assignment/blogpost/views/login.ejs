@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Login</title>
+    <script type="text/javascript">
+        function noBack(){window.history.forward();}
+        setTimeout("noBack()",0);
+        window.onunload=function(){null};
+    </script>
+</head>
+<body>  
+    <div class="container">
+        <div class="row justify-content-center align-items-center mt-5">
+            <h1>Login</h1>
+        </div>
+        <div class="row justify-content-center align-items-center" style="height:75vh">
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="/login" method="POST">
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" class="form-control" name="username" id="username">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" name="password" id="password">
+                            </div>
+                            <button type="submit" id="sendlogin" class="btn btn-primary">login</button>
+                            <a href="/signup" class="btn btn-success ">Sign up</a>
+                            <div class="text-danger">
+                                <%= message %>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+</body>
+</html>

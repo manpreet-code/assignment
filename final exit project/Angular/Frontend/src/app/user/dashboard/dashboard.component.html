@@ -1,0 +1,61 @@
+<br />
+<br />
+<br />
+<div class="container mt-5">
+  <!-- FETCHING DATA -->
+  <div *ngIf="!getData" class="pl-5 mx-auto" style="width: 200px;">
+    <div class="loader" data-toggle="tooltip" data-placement="top" title="Loading..."></div>
+  </div>
+
+  <!-- FETCHED DATA -->
+  <div *ngIf="getData">
+    <h1 class="display-4">My Dashboard</h1>
+    <hr>
+    <br/>
+    <div *ngIf="tickets; else elseBlock" class="table-responsive">
+      <table id="mytable" class="table table-bordred table-striped table-hover">
+        <thead style="background-color: rgb(235,242, 211)">
+          <th>#</th>
+          <th>Raised On</th>
+          <th>Status</th>
+          <th>Request Type</th>
+          <th>Priority</th>
+          <th>Project Name</th>
+          <th>Approver Name</th>
+          <th>View</th>
+          <th>Edit</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ticket of ticketData; let i = index">
+            <td>{{i+1}}</td>
+            <td>{{ ticket.createdAt | date}}</td>
+            <td>{{ ticket.status | titlecase}}</td>
+            <td>{{ ticket.requestType }}</td>
+            <td>{{ ticket.priority | slice:2| titlecase }}</td>
+            <td>{{ ticket.projectName | titlecase}}</td>
+            <td>{{ ticket.travelApproverName | titlecase}}</td>
+            <td><a class="btn btn-primary" routerLink="/tickets/{{ticket.id}}"><span class="material-icons glyphicon">read_more</span>View</a></td>
+            <td ><a *ngIf="ticket.status !='in process'" class="btn btn-danger" routerLink="/tickets/edit/{{ticket.id}}"><span class="material-icons glyphicon">edit</span>Edit</a></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <nav>
+        <ul class="pagination justify-content-center">
+          <li class="page-item" *ngIf="!firstpage">
+            <button class="page-link" (click)="previousClick()" [disabled]="firstpage"><span class="material-icons glyphicon">first_page</span>Previous</button>
+          </li>
+          <li class="page-item" *ngIf="!lastpage">
+            <button class="page-link" (click)="nextClick()" [disabled]="lastpage" >Next<span class="material-icons glyphicon">last_page</span></button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <ng-template #elseBlock>
+      <div class="alert alert-info" role="alert">
+        No tickets found!
+      </div>
+    </ng-template>
+  </div>
+</div>

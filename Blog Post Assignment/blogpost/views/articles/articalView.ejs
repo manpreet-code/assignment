@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script type="text/javascript">
+      function noBack(){window.history.forward();}
+      setTimeout("noBack()",0);
+      window.onunload=function(){null};
+  </script>
+    <title>ArticalView</title>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <a href="/articles" class="">back to index</a>
+            <div>
+            <a href="/articles/edit/<%= articales.id %>" class="btn btn-info ">Edit</a>
+            <form action="/articles/articalView/<%= articales.id %>?_method=DELETE" method="POST" class="d-inline">
+                <button type="submit" class="btn btn-danger">Delete</button>
+              </form>
+            </div>
+        </nav>
+    
+
+       
+          <div class="card mt-4">
+            <div class="card-body">
+              <h1 class="card-title text-center"><%= articales.title %></h1>
+            </div>
+            <div class="card-text m-2 text-justify"><p><%= articales.markdown %></p></div>
+          </div>
+      </div>
+    
+</body>
+</html>

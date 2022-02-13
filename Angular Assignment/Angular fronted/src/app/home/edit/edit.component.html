@@ -1,0 +1,27 @@
+
+<div class="container">
+    <form >
+    <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input required type="text" class="form-control" id="et"  placeholder="Add-Title" value={{blog?.title}} #edittitle>
+      </div>
+      <div class="mb-3">
+        <label for="title" class="form-label">category</label>
+        <input required type="text" class="form-control"  placeholder="Add-Category" value={{blog?.category}} #editcategory>
+      </div>
+      <div class="mb-3">
+        <label for="title" class="form-label">Content</label>
+        <textarea required name="markdown" id="markdown" class="form-control"placeholder="Add-Content" #editcontent>{{blog?.markdown}}</textarea>
+        <!-- <input type="text" class="form-control"  placeholder="Add-Content" #content> -->
+      </div>
+      <button type="button" (click)="editBlog(edittitle,editcontent,editcategory)" class="btn btn-primary">Submit</button>
+
+    </form>
+
+      
+      
+
+
+
+</div>
+

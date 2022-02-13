@@ -1,0 +1,9 @@
+<div class="container">
+  <div *ngFor="let blog of loadedData">       
+ <div class="card mt-4 " (click)="navigate(blog)" style="cursor: pointer;">
+        <div class="card-body">
+          <h1 class="card-title text-center">{{blog.title}}</h1>
+        </div>
+      </div>
+  </div>
+</div>

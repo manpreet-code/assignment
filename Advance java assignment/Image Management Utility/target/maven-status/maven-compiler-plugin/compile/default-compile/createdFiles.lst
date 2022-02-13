@@ -1,0 +1,16 @@
+com\nagarro\controller\GetImageSize.class
+com\nagarro\models\Image.class
+com\nagarro\services\LoginService.class
+com\nagarro\controller\ImageEdit.class
+com\nagarro\utils\HibernateUtilities.class
+com\nagarro\controller\ImageRetriever.class
+com\nagarro\controller\Logout.class
+com\nagarro\services\ImageManagementServiceImpl.class
+com\nagarro\services\LoginServiceImpl.class
+com\nagarro\controller\ImageUpload.class
+com\nagarro\controller\Login.class
+com\nagarro\controller\ResetPassword.class
+com\nagarro\constants\Constants.class
+com\nagarro\services\ImageManagementService.class
+com\nagarro\models\User.class
+com\nagarro\controller\ImageDelete.class

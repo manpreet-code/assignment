@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Student Enrollment Form</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <link rel="stylesheet" href="css/bootstrap.css" />
+  </head>
+  <body>
+    <header>
+      <h1 class="text-center p-2 text-white   sticky-top" style="background-color: aquamarine;">
+        Student Enrollment Form
+      </h1>
+    </header>
+
+    <main role="main">
+      <div class="container p-0">
+        <div class="row align-items-start">
+          <div
+            class="col-md-6 col-sm-6 mt-5"
+            style="border-right: 1px solid black"
+          >
+            <form id="form-student">
+              <div class="form-group row mt-5 mr-4">
+                <label for="name" class="col-sm-3 col-form-label m-1"
+                  >Name:</label
+                >
+                <div class="col-sm-4">
+                  <input type="text" id="name" class="form-control" required />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="email" class="col-sm-3 col-form-label m-1"
+                  >Email:</label
+                >
+                <div class="col-sm-4">
+                  <input
+                    type="email"
+                    id="email"
+                    class="form-control"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="website" class="col-sm-3 col-form-label m-1"
+                  >Website:</label
+                >
+
+                <div class="col-sm-4">
+                  <input
+                    type="url"
+                    id="website"
+                    class="form-control"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="imglink" class="col-sm-3 col-form-label m-1"
+                  >ImageLink:</label
+                >
+                <div class="col-sm-4">
+                  <input
+                    type="url"
+                    id="imagelink"
+                    class="form-control"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label m-1" id="gender"
+                  >Gender:</label
+                >
+
+                <div class="col-sm-3">
+                  <input
+                    type="radio"
+                    id="male"
+                    name="gender"
+                    value="Male"
+                    checked
+                  />
+
+                  <label for="male" class="col-sm-3 mt-3">Male</label>
+                </div>
+              </div>
+
+              <div class="form-group row m-1">
+                <div class="col-sm-1 offset-sm-2"></div>
+                <div class="col-sm-4 m-10">
+                  <input
+                    type="radio"
+                    id="female"
+                    name="gender"
+                    value="Female"
+                    required
+                  />
+                  <label for="female" class="col-sm-3">Female</label>
+                </div>
+              </div>
+
+              <div class="form-group col">
+                <label class="col-sm-3 m-1" id="skills">Skills:</label>
+
+                <input
+                  type="checkbox"
+                  id="skills"
+                  name="skills"
+                  value="Java"
+                  class="me-2"
+                  checked
+                />
+                <label for="java">Java</label>
+                <input
+                  type="checkbox"
+                  id="skills"
+                  name="skills"
+                  value="HTML"
+                  class="m-2"
+                />
+                <label for="html">HTML</label>
+                <input
+                  type="checkbox"
+                  id="skills"
+                  name="skills"
+                  value="CSS"
+                  class="m-2"
+                />
+                <label for="css">CSS</label><br />
+              </div>
+
+              <input
+                type="submit"
+                id="enroll"
+                value="Enroll Student"
+                class="btn btn-success float-left"
+              />
+
+              <button type="reset" id="clr" class="btn btn-danger m-4">
+                Clear
+              </button>
+            </form>
+          </div>
+
+          <div class="col justify-content-center">
+            <div class="row-1"></div>
+          </div>
+
+          <div class="col-md-5 col-sm-6 mt-4">
+            <div>
+              <h3 class="text-center p-2 mt-1 mb-4">Enrolled Students</h3>
+            </div>
+            <div style="height: 19.3em; overflow: scroll">
+              <table
+                class="table table-sm table-striped table-bordered"
+                id="form-table"
+              >
+                <thead class="bg-danger">
+                  <tr class="text-light">
+                    <th>Description</th>
+                    <th>Image</th>
+                  </tr>
+                </thead>
+                <tbody id="student-list" class="animated fadeIn"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <h6
+          class="text-center p-0 text-white  fixed-bottom m-0 "style="background-color: aquamarine;"
+        >
+          Copyright&copy; 2020-2021 by Fresher Training
+        </h6>
+      </footer>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

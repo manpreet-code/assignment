@@ -1,0 +1,42 @@
+<header>
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style='background-color: rgb(70, 215,172);'>
+  <a class="navbar-brand" >Travel Portal</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+
+
+    <ul  class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item " *ngIf="!authService.isAuthenticated();">
+        <a class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{ exact: true }" routerLink="/login"><span class="material-icons glyphicon">login</span>Login</a>
+      </li>
+      <li class="nav-item " *ngIf="!authService.isAuthenticated();">
+        <a class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{ exact: true }" routerLink="/signup"><span class="material-icons glyphicon">person_add</span>Sign Up</a>
+      </li>
+      <li class="nav-item " *ngIf="!authService.isAuthenticated();">
+        <a class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{ exact: true }" routerLink="/admin/login"><span class="material-icons glyphicon">admin_panel_settings</span>Admin</a>
+      </li>
+
+      <li class="nav-item " *ngIf="authService.isAuthenticated();">
+        <a class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{ exact: true }" routerLink=""><span class="material-icons glyphicon">home</span>Home</a>
+      </li>
+      <li class="nav-item " *ngIf="authService.isUser();">
+        <a class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{ exact: true }" routerLink="/dashboard"><span class="material-icons glyphicon">dashboard</span>Dashboard</a>
+      </li>
+
+      <li class="nav-item " *ngIf="authService.isAdmin();">
+        <a class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{ exact: true }" routerLink="/admin/dashboard"><span class="material-icons glyphicon">dashboard</span>Dashboard</a>
+      </li>
+
+      <li class="nav-item " *ngIf="authService.isUser();">
+        <a class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{ exact: true }" routerLink="/tickets/new-ticket"><span class="material-icons glyphicon">add</span>New Ticket</a>
+      </li>
+      <li class="nav-item " *ngIf="authService.isAuthenticated();">
+        <a class="nav-link" (click)="logout()"><span class="material-icons glyphicon">logout</span>Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+</header>

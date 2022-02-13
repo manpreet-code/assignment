@@ -1,0 +1,259 @@
+<br />
+<br />
+<br />
+<div class="container mt-5">
+
+  <div *ngIf="!submitted">
+    <h1 class="display-4" *ngIf="isNew">Raise Ticket</h1>
+    <h1 class="display-4" *ngIf="!isNew">Edit Ticket</h1>
+    <hr>
+    <br />
+    <form class="form-horizontal" #newTicketform="ngForm" (ngSubmit)="onSubmit(newTicketform)">
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="requestType">Request Type *</label>
+        <div class="col-md-9">
+          <select type="text" id="requestType" name="requestType" class="form-control"
+            [(ngModel)]="userTicketData.requestType" required #request="ngModel">
+            <option name="requestType" *ngFor="let req of requestType" [value]="req">
+              {{ req }}
+            </option>
+          </select>
+          <small class="form-text text-danger" *ngIf="!request.valid && request.touched">Select request
+            type!</small>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="priority">Priority *</label>
+        <div class="col-md-9">
+          <select type="text" id="priority" name="priority" class="form-control" [(ngModel)]="userTicketData.priority"
+            required #prior="ngModel">
+            <option name="priority" *ngFor="let pri of priority" [value]="pri">
+              {{ pri | slice:2 | titlecase}}
+            </option>
+          </select>
+          <small class="form-text text-danger" *ngIf="!prior.valid && prior.touched">Select priority!</small>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="travelCity">Travel City *</label>
+        <div class="col-md-9">
+          <input id="travelCity" name="travelCity" type="text" placeholder="Travel City" class="form-control" required
+            [(ngModel)]="userTicketData.travelCity" #travelCity="ngModel" />
+          <small class="form-text text-danger" *ngIf="!travelCity.valid && travelCity.touched">Invalid travel
+            city!</small>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="fromLocationCity">From Location City *</label>
+        <div class="col-md-9">
+          <input id="fromLocationCity" name="fromLocationCity" type="text" placeholder="From Location City"
+            class="form-control" required [(ngModel)]="userTicketData.fromLocationCity" #fromLocationCity="ngModel" />
+          <small class="form-text text-danger" *ngIf="!fromLocationCity.valid && fromLocationCity.touched">Invalid from
+            location city!</small>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="travelStartDate">Travel Start Date *</label>
+        <div class="col-md-9">
+          <input id="travelStartDate" name="travelStartDate" type="date" placeholder="Travel Start Date"
+            class="form-control" required [(ngModel)]="userTicketData.travelStartDate" #travelStartDate="ngModel" />
+          <small class="form-text text-danger" *ngIf="!travelStartDate.valid && travelStartDate.touched">Invalid travel
+            start date!</small>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="travelEndDate">Travel End Date *</label>
+        <div class="col-md-9">
+          <input id="travelEndDate" name="travelEndDate" type="date" placeholder="Travel End Date" class="form-control"
+            required [(ngModel)]="userTicketData.travelEndDate" min="{{userTicketData.travelStartDate}}"
+            [disabled]="!userTicketData.travelStartDate" #travelEndDate="ngModel" />
+          <small class="form-text text-danger" *ngIf="!travelStartDate.valid && travelStartDate.touched">Invalid travel
+            end date!</small>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="passportNumber">Passport Number *</label>
+        <div class="col-md-9">
+          <input id="passportNumber" name="passportNumber" type="text" placeholder="Passport Number"
+            class="form-control" required [(ngModel)]="userTicketData.passportNumber" maxlength="25"
+            #passportNumber="ngModel" />
+          <small class="form-text text-danger" *ngIf="!passportNumber.valid && passportNumber.touched">Invalid passport
+            number!</small>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="projectName">Project Name *</label>
+        <div class="col-md-9">
+          <textarea id="projectName" name="projectName" type="text" placeholder="Project Name" class="form-control"
+            required [(ngModel)]="userTicketData.projectName" maxlength="100" #projectName="ngModel"></textarea>
+          <small class="form-text text-danger" *ngIf="!projectName.valid && projectName.touched">Invalid project
+            name!</small>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label">Expense Borne By *</label>
+        <div class="col-md-9">
+          <div class="form-check" *ngFor="let party of expense">
+            <input class="form-check-input mt-2" type="radio" name="expenseBorneBy" required
+              [(ngModel)]="userTicketData.expenseBorneBy" [value]="party" [id]="party" #expenseBorneBy="ngModel" />
+            <label class="form-control-md form-check-label" [for]="party">{{ party | titlecase }}</label>
+            <small class="form-text text-danger" *ngIf="!expenseBorneBy.valid && expenseBorneBy.touched">Please select
+              expense borne by!</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="travelApproverName">Travel Approval Name</label>
+        <div class="col-md-9">
+          <textarea id="travelApproverName" name="travelApproverName" type="text"
+            placeholder="Travel approval name Manager/BU Head" class="form-control"
+            [(ngModel)]="userTicketData.travelApproverName" maxlength="100"></textarea>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="expectedDurationOfTravel">Expected Duration Of Travel</label>
+        <div class="col-md-9">
+          <textarea id="expectedDurationOfTravel" name="expectedDurationOfTravel" type="text"
+            placeholder="Expected duration of travel in case exact return date is not known..." class="form-control"
+            maxlength="100" [(ngModel)]="userTicketData.expectedDurationOfTravel"></textarea>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="upperBound">Any Upper Bound</label>
+        <div class="col-md-9">
+          <textarea id="upperBound" name="upperBound" type="text"
+            placeholder="Any Upper Bound on the allowed amount? If yes please specify" class="form-control"
+            [(ngModel)]="userTicketData.upperBound" maxlength="500"></textarea>
+
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="anyAdditionalDetails">Additional Details *</label>
+        <div class="col-md-9">
+          <textarea id="anyAdditionalDetails" name="anyAdditionalDetails" type="text" placeholder="Additional Details"
+            class="form-control" [(ngModel)]="userTicketData.anyAdditionalDetails" maxlength="1000"
+            #anyAdditionalDetails="ngModel" required></textarea>
+          <small class="form-text text-danger"
+            *ngIf="!anyAdditionalDetails.valid && anyAdditionalDetails.touched">Invalid upper bound
+            details!</small>
+        </div>
+      </div>
+      <br/>
+      <div class="form-group row">
+        <div class="col-md-4 col-form-label"></div>
+        <div class="col-md-4">
+          <div *ngIf="isNew; else elseBlock">
+            <input type="submit" class="col-sm-12 btn btn-primary px-5 center" [disabled]="!newTicketform.valid"
+              value="Create Ticket" />
+          </div>
+          <ng-template #elseBlock>
+            <input type="submit" class="btn btn-primary px-md-4 my-2 mr-1 center" [disabled]="!newTicketform.valid" value="Edit Ticket" />
+            <button class="btn btn-danger px-md-4 my-2 mr-1 center" (click)="cancel()"><span class="material-icons glyphicon">cancel</span>Cancel</button>
+          </ng-template>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+  <div *ngIf="!getData && submitted" class="pl-5 mx-auto" style="width: 200px;">
+    <div class="loader" data-toggle="tooltip" data-placement="top" title="Loading..."></div>
+  </div>
+
+  <div *ngIf="submitted && getData" class="jumbotron">
+    <h1 class="display-4">Registration Confirmation</h1>
+    <p class="lead">Thank you for registering ticket.</p>
+    <hr class="my-4">
+    <div class="container">
+      <div class="row ">
+        <label class="col-sm-3">Ticket Id</label>
+        <div class="col-sm-9">{{ userTicketData.id }}</div>
+      </div>
+      <div class="row ">
+        <label class="col-sm-3">Request Type</label>
+        <div class="col-sm-9">{{ userTicketData.requestType }}</div>
+      </div>
+
+      <div class="row ">
+        <label class="col-sm-3">Priority</label>
+        <div class="col-sm-9">{{ userTicketData.priority | slice:2 | titlecase}}</div>
+      </div>
+
+      <div class="row ">
+        <label class="col-sm-3">Destination Location</label>
+        <div class="col-sm-9">{{ userTicketData.travelCity }}</div>
+      </div>
+
+      <div class="row ">
+        <label class="col-sm-3">Departure Location</label>
+        <div class="col-sm-9">{{ userTicketData.fromLocationCity }}</div>
+      </div>
+
+      <div class="row ">
+        <label class="col-sm-3">Travel Start Date
+        </label>
+        <div class="col-sm-9">{{ userTicketData.travelStartDate }}</div>
+      </div>
+
+      <div class="row ">
+        <label class="col-sm-3">Travel End Date
+        </label>
+        <div class="col-sm-9">{{ userTicketData.travelEndDate }}</div>
+      </div>
+      <div class="row ">
+        <label class="col-sm-3">Passport Number
+        </label>
+        <div class="col-sm-9">{{ userTicketData.passportNumber }}</div>
+      </div>
+      <div class="row ">
+        <label class="col-sm-3">Project Name
+        </label>
+        <div class="col-sm-9">{{ userTicketData.projectName }}</div>
+      </div>
+      <div class="row ">
+        <label class="col-sm-3">Expense Borne By
+        </label>
+        <div class="col-sm-9">{{ userTicketData.expenseBorneBy | titlecase }}</div>
+      </div>
+      <div *ngIf="userTicketData.travelApproverName" class="row ">
+        <label class="col-sm-3">Travel Approval Name
+        </label>
+        <div class="col-sm-9">{{ userTicketData.travelApproverName }}</div>
+      </div>
+      <div *ngIf="userTicketData.expectedDurationOfTravel" class="row ">
+        <label class="col-sm-3">Expected Duration Of Travel
+        </label>
+        <div class="col-sm-9">{{ userTicketData.expectedDurationOfTravel }}</div>
+      </div>
+      <div *ngIf="userTicketData.upperBound" class="row ">
+        <label class="col-sm-3">Other Expenses
+        </label>
+        <div class="col-sm-9">{{ userTicketData.upperBound }}</div>
+      </div>
+      <div class="row ">
+        <label class="col-sm-3">Additional Details
+        </label>
+        <div class="col-sm-9">{{ userTicketData.anyAdditionalDetails }}</div>
+      </div>
+      
+      <button class="btn btn-success px-md-4 my-2 mr-1" (click)="onPrint()"><span
+          class="material-icons glyphicon">print</span>Print</button>
+      <button class="btn btn-danger px-md-4 my-2" (click)="editData()"><span
+          class="material-icons glyphicon">edit</span>Edit</button>
+      <a class="btn btn-primary px-md-4 my-2 mx-1" routerLink=""><span
+          class="material-icons glyphicon">home</span>Return to Home Page</a>
+    </div>
+
+  </div>

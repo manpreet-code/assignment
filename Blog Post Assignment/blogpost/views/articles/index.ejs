@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>BlogPosts</title>
+    <script type="text/javascript">
+      function noBack(){window.history.forward();}
+      setTimeout("noBack()",0);
+      window.onunload=function(){null};
+  </script>
+  <style>
+    div[data-href]{
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar bg-dark">
+    <h1 class="text-muted">Blog Articles</h1>
+    <div>
+    <a href="/articles/new" class="btn btn-success ">New Article</a>
+    <a href="/" class="btn btn-danger ">Log out</a>
+  </div>
+</nav>
+    <div class="container">
+        
+    
+
+        <% articals.forEach(article => { %>
+          <div class="card mt-4" data-href="/articles/articalView/<%= article.id %>">
+            <div class="card-body">
+              <h1 class="card-title text-center"><%= article.title %></h1>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+      <script>
+        document.addEventListener("DOMContentLoaded",()=>{
+          const card= document.querySelectorAll("div[data-href]");
+        card.forEach(element => {
+          element.addEventListener("click",()=>{
+            window.location.href=element.dataset.href;
+          })
+            
+          });
+        })
+      </script>
+    
+</body>
+</html>

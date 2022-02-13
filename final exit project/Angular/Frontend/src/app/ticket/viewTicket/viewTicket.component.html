@@ -1,0 +1,119 @@
+<br />
+<br />
+<br />
+<div class="container mt-5">
+  <div *ngIf="!getData" class="pl-5 mx-auto" style="width: 200px;">
+    <div class="loader" data-toggle="tooltip" data-placement="top" title="Loading..."></div>
+  </div>
+  <div *ngIf="getData">
+    <div class="jumbotron">
+      <h1 class="display-3">Ticket Details</h1>
+      <p class="lead ml-1"> By {{ userTicketData.userName }} </p>
+      <hr class="my-4">
+      <div class="container">
+        <div class="row ">
+          <label class="col-sm-3">Ticket Id
+          </label>
+          <div class="col-sm-9">{{userTicketData.id}}</div>
+        </div>
+
+        <div class="row ">
+          <label class="col-sm-3">Current Status
+          </label>
+          <div class="col-sm-9">{{ userTicketData.status | titlecase}}</div>
+        </div>
+
+        <div class="row ">
+          <label class="col-sm-3">Request Type</label>
+          <div class="col-sm-9">{{ userTicketData.requestType }}</div>
+        </div>
+
+        <div class="row ">
+          <label class="col-sm-3">Priority</label>
+          <div class="col-sm-9">{{ userTicketData.priority | slice:2 | titlecase}}</div>
+        </div>
+
+        <div class="row ">
+          <label class="col-sm-3">Destination Location</label>
+          <div class="col-sm-9">{{ userTicketData.travelCity }}</div>
+        </div>
+
+        <div class="row ">
+          <label class="col-sm-3">Departure Location</label>
+          <div class="col-sm-9">{{ userTicketData.fromLocationCity }}</div>
+        </div>
+
+        <div class="row ">
+          <label class="col-sm-3">Travel Start Date
+          </label>
+          <div class="col-sm-9">{{ userTicketData.travelStartDate| date: 'fullDate' }}</div>
+        </div>
+
+        <div class="row ">
+          <label class="col-sm-3">Travel End Date
+          </label>
+          <div class="col-sm-9">{{ userTicketData.travelEndDate | date: 'fullDate'}}</div>
+        </div>
+        <div class="row ">
+          <label class="col-sm-3">Passport Number
+          </label>
+          <div class="col-sm-9">{{ userTicketData.passportNumber }}</div>
+        </div>
+        <div class="row ">
+          <label class="col-sm-3">Project Name
+          </label>
+          <div class="col-sm-9">{{ userTicketData.projectName | titlecase}}</div>
+        </div>
+        <div class="row ">
+          <label class="col-sm-3">Expense Borne By
+          </label>
+          <div class="col-sm-9">{{ userTicketData.expenseBorneBy | titlecase }}</div>
+        </div>
+        <div *ngIf="userTicketData.travelApproverName" class="row ">
+          <label class="col-sm-3">Travel Approval Name
+          </label>
+          <div class="col-sm-9">{{ userTicketData.travelApproverName | titlecase}}</div>
+        </div>
+
+        <div *ngIf="userTicketData.expectedDurationOfTravel" class="row ">
+          <label class="col-sm-3">Expected Duration Of Travel
+          </label>
+          <div class="col-sm-9">{{ userTicketData.expectedDurationOfTravel }}</div>
+        </div>
+
+        <div *ngIf="userTicketData.comments" class="row ">
+          <label class="col-sm-3">Comments</label>
+          <div class="col-sm-9">{{ userTicketData.comments }}</div>
+        </div>
+
+        <div *ngIf="userTicketData.upperBound" class="row ">
+          <label class="col-sm-3">Other Expenses
+          </label>
+          <div class="col-sm-9">{{ userTicketData.upperBound }}</div>
+        </div>
+        <div class="row">
+          <label class="col-sm-3">Additional Details
+          </label>
+          <div class="col-sm-9">{{ userTicketData.anyAdditionalDetails }}</div>
+        </div>
+
+        <div *ngIf="userTicketData.responseFiles.length">
+          <div class="row">
+            <label class="col-sm-3">Files
+            </label>
+            <div class="col-sm-9"></div>
+          </div>
+          <div class="row" *ngFor="let file of userTicketData.responseFiles">
+            <label class="col-sm-3"></label>
+            <div class="col-sm-9 text-truncate">{{ file.name | titlecase}}
+              <a class="file" href="{{ file.url }}" target="_blank"><span class="material-icons glyphicon">
+                  file_download
+                </span></a>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <button class="btn btn-danger px-md-4 my-2 mr-1" (click)="onPrint()"><span class="material-icons glyphicon">print</span>Print</button>
+        <a class="btn btn-primary px-md-4 my-2 mx-1" routerLink="/dashboard"><span class="material-icons glyphicon">home</span>Return to Home</a>
+      </div>
+    </div>

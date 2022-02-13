@@ -1,0 +1,227 @@
+<br />
+<br />
+<br />
+<div class="container mt-5">
+  <div id="formContent" *ngIf="!registered">
+    <form #SignUpForm="ngForm" (ngSubmit)="onSubmit(SignUpForm)">
+      <h1 class="display-4" *ngIf="isNew">Sign Up</h1>
+      <h1 class="display-4" *ngIf="!isNew">Edit Details</h1>
+      <hr>
+      <br />
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="firstName">First Name *</label>
+        <div class="col-md-9">
+          <input class="form-control" type="text" id="firstName" [(ngModel)]="userData.firstName" name="firstName"
+            placeholder="First Name" required #firstName="ngModel" />
+          <small class="text-danger" *ngIf="!firstName.valid && firstName.touched">Invalid first name!</small>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="lastName">Last Name *</label>
+        <div class="col-md-9">
+          <input class="form-control" type="text" id="lastName" [(ngModel)]="userData.lastName" name="lastName"
+            placeholder="Last Name" required #lastName="ngModel" />
+          <small class="text-danger" *ngIf="!lastName.valid && lastName.touched">Invalid last name!</small>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="buisnessUnit">Bussiness Unit *</label>
+        <div class="col-md-9">
+          <input class="form-control" type="text" id="buisnessUnit" [(ngModel)]="userData.buisnessUnit"
+            name="buisnessUnit" placeholder="Your Bussiness Unit" required #buisnessUnit="ngModel" />
+          <small class="text-danger" *ngIf="!buisnessUnit.valid && buisnessUnit.touched">Invalid buisness unit!</small>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="title">Title *</label>
+        <div class="col-md-9">
+          <input class="form-control" type="text" id="title" [(ngModel)]="userData.title" name="title"
+            placeholder="Your Title" required #title="ngModel" />
+          <small class="text-danger" *ngIf="!title.valid && title.touched">Invalid title!</small>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="email">Email *</label>
+        <div class="col-md-9">
+          <input class="form-control" type="text" id="email" [(ngModel)]="userData.email" name="email"
+            placeholder="Your Email" required email #email="ngModel" [pattern]=emailPattern />
+          <small class="text-danger" *ngIf="!email.valid && email.touched">Invalid email!</small>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="telephone">Telephone *</label>
+        <div class="col-md-9">
+          <input class="form-control" type="text" id="telephone" [(ngModel)]="userData.telephone" name="telephone"
+            placeholder="Your Contact" required #telephone="ngModel" [pattern]=telephonePattern
+            (click)=telephoneVerify() />
+          <small class="text-danger" *ngIf="!telephone.valid && telephone.touched">Invalid contact!</small>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="address1">Address 1 *</label>
+        <div class="col-md-9">
+          <input class="form-control" type="text" id="address1" [(ngModel)]="userData.address1" name="address1"
+            placeholder="Enter Your address(1)" required #address1="ngModel" />
+          <small class="text-danger" *ngIf="!address1.valid && address1.touched">Invalid address1!</small>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="address2">Address 2</label>
+        <div class="col-md-9">
+          <input class="form-control" type="text" id="address2" [(ngModel)]="userData.address2" name="address2"
+            placeholder="Enter Your address(2)" />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="zip">Zip *</label>
+        <div class="col-md-9">
+          <input class="form-control" type="text" id="zip" [(ngModel)]="userData.zip" name="zip" placeholder="Zip"
+            required #zip="ngModel" />
+          <small class="text-danger" *ngIf="!zip.valid && zip.touched">Invalid zip!</small>
+        </div>
+      </div>
+
+      <!-- <select name="country" class="countries" id="countryId">
+      <option value="">Select Country</option>
+    </select>
+    <select name="state" class="states" id="stateId">
+      <option value="">Select State</option>
+    </select>
+    <select name="city" class="cities" id="cityId">
+      <option value="">Select City</option>
+    </select> -->
+
+
+
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="country">Country *</label>
+        <div class="col-md-9">
+          <select type="text" id="country" class="form-control" [(ngModel)]="userData.country" name="country"
+            (change)="changeCountry($event.target.value)" required #country="ngModel">
+            <option  name="country" *ngFor="let country of countrylist" [value]="country.name">{{ country.name  }} </option>
+          </select>
+          <small class="text-danger" *ngIf="!country.valid && country.touched">Invalid country!</small>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="state">State *</label>
+        <div class="col-md-9">
+          <select class="form-control" type="text" id="state" [(ngModel)]="userData.state" name="state"
+            placeholder="State" required #state="ngModel" >
+            <option  name="State" *ngFor="let st of statelist" [value]="st">{{ st  }} </option>
+          </select>
+          <small class="text-danger" *ngIf="!state.valid && state.touched">Invalid state!</small>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="city" id="req">City *</label>
+        <div class="col-md-9">
+          <input class="form-control" type="text" id="city" [(ngModel)]="userData.city" name="city"
+            placeholder="City" required #city="ngModel" />
+          <small class="text-danger" *ngIf="!city.valid && city.touched">Invalid city!</small>
+        </div>
+      </div>
+      <br />
+      <div class="form-group row">
+        <div class="col-md-4 col-form-label"></div>
+        <div class="col-md-4">
+          <div *ngIf="isNew; else elseBlock">
+            <input type="submit" class="col-sm-12 btn btn-primary px-5 center" [disabled]="!SignUpForm.valid"
+              value="Sign Up" />
+          </div>
+          <ng-template #elseBlock><input type="submit" class="btn btn-primary px-md-4 my-2 mr-1 center"
+              [disabled]="!SignUpForm.valid" value="Update" />
+              <button class="btn btn-danger px-md-4 my-2 mr-1 center" (click)="cancel()"><span class="material-icons glyphicon">cancel</span>Cancel</button>
+          </ng-template>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+
+  <div *ngIf="registered && !getData" class="pl-5 mx-auto" style="width: 200px;">
+    <div class="loader" data-toggle="tooltip" data-placement="top" title="Loading..."></div>
+  </div>
+
+  <div *ngIf="registered && getData" class="jumbotron">
+    <h1 class="display-4">Registration Confirmation</h1>
+    <p class="lead">Thank you for registering .The admin will contact you shortly with username and password.</p>
+    <hr class="my-4">
+    <div class="container">
+
+      <div class="row ">
+        <label class="col-sm-3">Name</label>
+        <div class="col-sm-9">{{ userData.firstName }} {{ userData.lastName }}</div>
+      </div>
+
+      <div class="row ">
+        <label class="col-sm-3">Bussiness Unit</label>
+        <div class="col-sm-9">{{ userData.buisnessUnit }}</div>
+      </div>
+
+      <div class="row ">
+        <label class="col-sm-3">Title</label>
+        <div class="col-sm-9">{{ userData.title }}</div>
+      </div>
+
+      <div class="row ">
+        <label class="col-sm-3">Email</label>
+        <div class="col-sm-9">{{ userData.email }}</div>
+      </div>
+
+      <div class="row ">
+        <label class="col-sm-3">Telephone</label>
+        <div class="col-sm-9">{{ userData.telephone }}</div>
+      </div>
+
+      <div class="row ">
+        <label class="col-sm-3">Address 1</label>
+        <div class="col-sm-9">{{ userData.address1 }}</div>
+      </div>
+
+      <div *ngIf="userData.address2" class="row ">
+        <label class="col-sm-3">Address 2</label>
+        <div class="col-sm-9">{{ userData.address2 }}</div>
+      </div>
+
+      <div class=" row ">
+        <label class="col-sm-3">City</label>
+        <div class="col-sm-8">{{ userData.city }}</div>
+      </div>
+
+      <div class=" row ">
+        <label class="col-sm-3">State</label>
+        <div class="col-sm-9">{{ userData.state }}</div>
+      </div>
+
+      <div class=" row ">
+        <label class="col-sm-3">Zip</label>
+        <div class="col-sm-9">{{ userData.zip }}</div>
+      </div>
+
+      <div class=" row ">
+        <label class="col-sm-3">Country</label>
+        <div class="col-sm-9">{{ userData.country }}</div>
+      </div>
+
+      <button class="btn btn-success px-md-4 my-2 mr-1" (click)="onPrint()"><span
+          class="material-icons glyphicon">print</span>Print</button>
+      <button class="btn btn-danger px-md-4 my-2" (click)="editData()"><span
+          class="material-icons glyphicon">edit</span>Edit</button>
+      <a class="btn btn-primary px-md-4 my-2 mx-1" routerLink="/login">Return to Home Page</a>
+    </div>
+
+  </div>
+
+</div>

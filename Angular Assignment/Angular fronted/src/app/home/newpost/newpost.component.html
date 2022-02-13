@@ -1,0 +1,22 @@
+
+<div class="container">
+    <form>
+    <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input required type="text" class="form-control"  placeholder="Add Title" #title>
+      </div>
+      
+      <div class="mb-3">
+        <label for="title" class="form-label">Category</label>
+        <input required type="text" class="form-control"  placeholder="Add-Category" #category>
+      </div>
+      <div class="mb-3">
+        <label for="title" class="form-label">Content</label>
+        <textarea required name="markdown" id="markdown" class="form-control"placeholder="Add-Content" #content></textarea>
+        <!-- <input type="text" class="form-control"  placeholder="Add-Content" #content> -->
+      </div>
+      <button type="button" (click)="addBlog(title,content,category)" class="btn btn-primary">Submit</button>
+
+    </form>
+    <div style="color: red;" ><p *ngif="feild">Please fill all the field</p></div>
+</div>

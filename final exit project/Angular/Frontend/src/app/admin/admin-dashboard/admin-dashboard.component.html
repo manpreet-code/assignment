@@ -1,0 +1,87 @@
+<br />
+<br />
+<br />
+<div class="container mt-5">
+  <div *ngIf="!data" class="pl-5 mx-auto" style="width: 200px;">
+    <div class="loader" data-toggle="tooltip" data-placement="top" title="Loading..."></div>
+  </div>
+  <div *ngIf="data">
+    <h1 class="display-4">Dashboard</h1>
+    <hr>
+    <br />
+    <div *ngIf="tickets; else elseBlock">
+      <div class="form-inline">
+        <select class="custom-select m-1" id="sortBy" [(ngModel)]="sortBy" (ngModelChange)="updateSortModel()">
+          <option selected value="">Sort By</option>
+          <option value="createdAt">Submission Date</option>
+          <option value="priority">Priority</option>
+        </select>
+
+        <div class="mr-auto"></div>
+        <select class="custom-select m-1" id="searchBy" [(ngModel)]="searchBy">
+          <option selected value="">Search By</option>
+          <option value="priority">Priority</option>
+          <option value="projectName">Project Name</option>
+          <option value="buisnessUnit">BU</option>
+          <option value="username">Username</option>
+          <option value="travelCity">Travel City</option>
+        </select>
+
+        <input type="text" id="search" class="form-control m-1" [(ngModel)]="search" placeholder="Search">
+
+        <input class="btn btn-primary m-1" type="button" value="Search" (click)="searchTickets()">
+
+      </div>
+      <br />
+
+      <div class="table-responsive">
+        <table id="mytable" class="table table-bordred table-striped table-hover">
+          <thead style="background-color: rgb(235,242, 211)">
+            <th>#</th>
+            <th>Raised On</th>
+            <th>Status</th>
+            <th>Request Type</th>
+            <th>Priority</th>
+            <th>Project Name</th>
+            <th>Approver Name</th>
+            <th>View</th>
+            <th>Edit</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let ticket of ticketData; let i = index">
+              <td>{{i+1}}</td>
+              <td>{{ ticket.createdAt | date }}</td>
+              <td>{{ ticket.status | titlecase}}</td>
+              <td>{{ ticket.requestType }}</td>
+              <td>{{ ticket.priority | slice:2| titlecase }}</td>
+              <td>{{ ticket.projectName | titlecase}}</td>
+              <td>{{ ticket.travelApproverName | titlecase}}</td>
+              <td><a class="btn btn-primary" routerLink="/tickets/{{ticket.id}}"><span
+                    class="material-icons glyphicon">read_more</span>View</a></td>
+              <td><a class="btn btn-danger" routerLink="/tickets/update/{{ticket.id}}"><span
+                    class="material-icons glyphicon">edit</span>Edit</a></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <nav>
+          <ul class="pagination justify-content-center">
+            <li class="page-item" *ngIf="!firstpage">
+              <button class="page-link" (click)="previousClick()" [disabled]="firstpage"><span
+                  class="material-icons glyphicon">first_page</span>Previous</button>
+            </li>
+            <li class="page-item" *ngIf="!lastpage">
+              <button class="page-link" (click)="nextClick()" [disabled]="lastpage">Next<span
+                  class="material-icons glyphicon">last_page</span></button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <ng-template #elseBlock>
+      <div class="alert alert-info" role="alert">
+        No tickets found!
+      </div>
+    </ng-template>
+  </div>
+</div>

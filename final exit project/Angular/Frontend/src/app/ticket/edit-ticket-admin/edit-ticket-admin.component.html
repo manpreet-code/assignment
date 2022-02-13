@@ -1,0 +1,46 @@
+<br/>
+<br/>
+<br/>
+<div class="container mt-5">
+  <div *ngIf="getData">
+    <h1 class="display-4">Edit Ticket</h1>
+    <hr>
+    <br/>
+
+    <form #adminForm="ngForm" class="form-horizontal" enctype="multipart/form-data" (ngSubmit)="onSubmit(adminForm)">
+
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="status">Status</label>
+        <div class="col-md-9">
+          <select id="status" name="status" (ngModel)="adminTicketData.status" class="form-control" required #status="ngModel">
+            <option name="status" *ngFor="let status of statuses" [value]="status">
+              {{ status | titlecase}}
+            </option>
+          </select>
+          <small class="form-text text-danger" *ngIf="!status.valid && status.touched">Select status
+            type!</small>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="comments" placeholder="Comments">Comments</label>
+        <div class="col-md-9">
+          <input id="comments" name="comments" type="text" class="form-control" [(ngModel)]="adminTicketData.comments" />
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="file">Files</label>
+        <div class="col-md-9">
+        <input id="file" name="file" type="file" class="form-control-file" multiple="multiple" ngModel (change)="onFileChanged($event)"/>
+      </div>
+      </div>
+      <button type="submit" class="btn btn-primary px-md-4 my-2" [disabled]="!canUpload || !adminForm.valid" class="btn btn-primary">Update</button>
+      <a class="btn btn-danger px-md-4 my-2 mx-1" routerLink="/admin/dashboard"><span class="material-icons glyphicon">close</span>Cancel</a>
+    </form>
+  </div>
+  <div *ngIf="!getData" class="pl-5 mx-auto" style="width: 200px;">
+    <div class="loader" data-toggle="tooltip" data-placement="top" title="Loading..."></div>
+  </div>
+</div>
